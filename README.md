@@ -1,19 +1,57 @@
-# Interactive-Calculator
-Small project on Interactive Calculator
-This project aims to develop an interactive calculator using web technologies such as HTML, CSS, and JavaScript. The calculator provides a user-friendly interface for performing basic mathematical operations. Users can input numbers, perform calculations, and see the results dynamically.
+# Interactive Calculator
 
-The calculator features a clean and intuitive design, making it easy to use for users of all levels. It supports essential mathematical operations like addition, subtraction, multiplication, and division. As users input numbers or perform operations, the calculator updates the result in real-time, providing instant feedback.
+A complete web calculator with a sequential engine, calculation history, memory keys, keyboard support, and a dark/light theme. The original tutorial files used `eval()`, a misspelled HTML filename, and incomplete error handling. This version replaces them with a real, usable project.
 
-The project also includes error handling to ensure accurate calculations. It handles common errors such as dividing by zero or entering invalid characters, providing appropriate error messages or notifications.
+## Features
 
-With its attractive and visually appealing design, the calculator offers a pleasant user experience. It combines functionality with style, making it an ideal tool for anyone needing quick and accurate calculations on the web.
+- Addition, subtraction, multiplication, and division
+- Decimal input, sign toggle, percent, square, square root, and reciprocal
+- All clear, backspace, and repeating equals
+- Memory keys: `MC`, `MR`, `M+`, `M−`
+- Persistent history and theme via `localStorage`
+- Full keyboard support
+- Safe evaluation with no `eval()`
+- Divide-by-zero and invalid-operation messages
 
-Overall, this project provides an engaging and efficient solution for performing basic mathematical operations in a visually appealing and user-friendly manner.
+## Project structure
 
-Key Features:
-User-friendly interface: The calculator will have a clean and intuitive user interface, making it easy for users to perform calculations.
-Basic operations: It will support essential mathematical operations such as addition, subtraction, multiplication, and division.
-Dynamic calculation: The calculator will update the result in real-time as the user inputs numbers or performs operations.
-Clear functionality: It will include a clear button to remove the entered numbers or reset the calculator.
-Error handling: The calculator will handle common errors, such as dividing by zero or entering invalid characters.
-Now let’s take a look at the HTML, CSS, and JavaScript code to create an attractive UI for the calculator:
+```
+index.html          # App shell
+css/styles.css      # Theme and layout
+js/calculator.js    # Calculator engine
+js/app.js           # UI, keyboard, and persistence
+tests/              # Node test runner coverage
+assets/favicon.svg  # App icon
+```
+
+## Run locally
+
+Open `index.html` in a browser, or serve the folder:
+
+```bash
+python3 -m http.server 4173
+```
+
+Then visit [http://localhost:4173](http://localhost:4173).
+
+## Tests
+
+```bash
+npm test
+```
+
+The suite uses Node's built-in test runner. No extra dependencies are required.
+
+## Keyboard shortcuts
+
+| Key | Action |
+| --- | --- |
+| `0`–`9` | Digits |
+| `.` or `,` | Decimal |
+| `+` `-` `*` `/` | Operators |
+| `Enter` or `=` | Equals |
+| `Backspace` | Delete last digit |
+| `Escape` | All clear |
+| `Delete` | Clear entry |
+| `%` | Percent |
+| `n` | Toggle sign |

@@ -1,0 +1,11 @@
+{
+  "name": "interactive-calculator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Interactive calculator with history, memory, keyboard support, and safe evaluation.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "start": "python3 -m http.server 4173"
+  }
+}
