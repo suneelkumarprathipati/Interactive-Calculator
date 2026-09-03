@@ -203,7 +203,9 @@ export function createController(api) {
     return applyRemote(async () => {
       const body = await api.unary(operation, value, base);
       state.displayValue = String(body.result);
-      state.waitingForOperand = true;
+      // Percent replaces the current operand so 200 + 10% = still waits for =.
+      // Square / sqrt / 1/x are complete answers, so the next key starts fresh.
+      state.waitingForOperand = operation !== "percent";
       state.history = body.history;
       return snapshot();
     });
