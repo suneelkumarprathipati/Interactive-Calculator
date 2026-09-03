@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Full-stack interactive calculator. The UI runs in the browser; every calculation is computed by the Express API."
+    />
+    <title>Interactive Calculator</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="masthead">
+        <div>
+          <p class="eyebrow">Full-stack workshop</p>
+          <h1>Interactive Calculator</h1>
+        </div>
+        <div class="toolbar">
+          <span class="status" data-status data-online="false">Checking backend…</span>
+          <button
+            type="button"
+            class="ghost"
+            data-history-toggle
+            aria-expanded="false"
+            aria-controls="history-panel"
+          >
+            History
+          </button>
+          <button type="button" class="ghost theme-toggle" data-theme-toggle aria-label="Switch to light theme">
+            <span class="theme-toggle__icon" aria-hidden="true"></span>
+          </button>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <section class="calculator" aria-label="Calculator">
+          <div class="display" aria-live="polite">
+            <div class="display__meta">
+              <span class="memory-flag" data-memory-flag hidden>M</span>
+              <span class="expression" data-expression>&nbsp;</span>
+            </div>
+            <div class="display__value" data-display>0</div>
+          </div>
+
+          <div class="keypad" data-keypad>
+            <button type="button" class="key key--fn" data-action="memory-clear" aria-label="Memory clear">MC</button>
+            <button type="button" class="key key--fn" data-action="memory-recall" aria-label="Memory recall">MR</button>
+            <button type="button" class="key key--fn" data-action="memory-add" aria-label="Memory add">M+</button>
+            <button type="button" class="key key--fn" data-action="memory-subtract" aria-label="Memory subtract">M−</button>
+
+            <button type="button" class="key key--fn" data-action="square" aria-label="Square">x²</button>
+            <button type="button" class="key key--fn" data-action="sqrt" aria-label="Square root">√</button>
+            <button type="button" class="key key--fn" data-action="reciprocal" aria-label="Reciprocal">1/x</button>
+            <button type="button" class="key key--fn" data-action="backspace" aria-label="Backspace">⌫</button>
+
+            <button type="button" class="key key--warn" data-action="clear" aria-label="All clear">AC</button>
+            <button type="button" class="key key--fn" data-action="sign" aria-label="Toggle sign">±</button>
+            <button type="button" class="key key--fn" data-action="percent" aria-label="Percent">%</button>
+            <button type="button" class="key key--op" data-action="operator" data-value="/" aria-label="Divide">÷</button>
+
+            <button type="button" class="key" data-action="digit" data-value="7">7</button>
+            <button type="button" class="key" data-action="digit" data-value="8">8</button>
+            <button type="button" class="key" data-action="digit" data-value="9">9</button>
+            <button type="button" class="key key--op" data-action="operator" data-value="*" aria-label="Multiply">×</button>
+
+            <button type="button" class="key" data-action="digit" data-value="4">4</button>
+            <button type="button" class="key" data-action="digit" data-value="5">5</button>
+            <button type="button" class="key" data-action="digit" data-value="6">6</button>
+            <button type="button" class="key key--op" data-action="operator" data-value="-" aria-label="Subtract">−</button>
+
+            <button type="button" class="key" data-action="digit" data-value="1">1</button>
+            <button type="button" class="key" data-action="digit" data-value="2">2</button>
+            <button type="button" class="key" data-action="digit" data-value="3">3</button>
+            <button type="button" class="key key--op" data-action="operator" data-value="+" aria-label="Add">+</button>
+
+            <button type="button" class="key key--wide" data-action="digit" data-value="0">0</button>
+            <button type="button" class="key" data-action="decimal" aria-label="Decimal point">.</button>
+            <button type="button" class="key key--eq" data-action="equals" aria-label="Equals">=</button>
+          </div>
+        </section>
+
+        <aside class="history" id="history-panel" data-history-panel>
+          <div class="history__header">
+            <h2>Server history</h2>
+            <button type="button" class="ghost" data-history-clear>Clear</button>
+          </div>
+          <p class="history__empty" data-history-empty>
+            Completed calculations are stored by the Express API. Click a result to reuse it.
+          </p>
+          <div class="history__list" data-history-list></div>
+        </aside>
+      </main>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
