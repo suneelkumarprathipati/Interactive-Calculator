@@ -131,6 +131,13 @@ test("unary operations record history from the API", async () => {
   assert.equal(state.history[0].expression, "√(9)");
 });
 
+test("loadHistory snapshot is not busy so the keypad can accept clicks", async () => {
+  const controller = createController(createLocalApi());
+  const state = await controller.loadHistory();
+  assert.equal(state.busy, false);
+  assert.equal(state.online, true);
+});
+
 test("history result can be reused in the next calculation", async () => {
   const controller = createController(createLocalApi());
   await press(controller, ["8", "+", "2", "="]);

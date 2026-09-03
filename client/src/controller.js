@@ -75,19 +75,20 @@ export function createController(api) {
     }
     state.busy = true;
     try {
-      const result = await fn();
+      await fn();
       state.online = true;
       state.error = null;
-      return result;
     } catch (error) {
       state.error = error.message;
       if (error.message.startsWith("Cannot reach")) {
         state.online = false;
       }
-      return snapshot();
     } finally {
+      // Snapshot after this flag clears. Returning a mid-request
+      // snapshot would leave the keypad stuck with pointer-events: none.
       state.busy = false;
     }
+    return snapshot();
   }
 
   function inputDigit(digit) {
@@ -140,7 +141,6 @@ export function createController(api) {
         state.accumulator = body.result;
         state.displayValue = String(body.result);
         state.history = body.history;
-        return snapshot();
       });
       if (state.error) {
         return applied;
@@ -168,7 +168,6 @@ export function createController(api) {
         state.pendingOperator = null;
         state.waitingForOperand = true;
         state.history = body.history;
-        return snapshot();
       });
     }
 
@@ -180,7 +179,6 @@ export function createController(api) {
         state.accumulator = body.result;
         state.waitingForOperand = true;
         state.history = body.history;
-        return snapshot();
       });
     }
 
@@ -207,7 +205,6 @@ export function createController(api) {
       // Square / sqrt / 1/x are complete answers, so the next key starts fresh.
       state.waitingForOperand = operation !== "percent";
       state.history = body.history;
-      return snapshot();
     });
   }
 
@@ -284,7 +281,6 @@ export function createController(api) {
     return applyRemote(async () => {
       const body = await api.history();
       state.history = body.history;
-      return snapshot();
     });
   }
 
@@ -292,7 +288,6 @@ export function createController(api) {
     return applyRemote(async () => {
       const body = await api.clearHistory();
       state.history = body.history;
-      return snapshot();
     });
   }
 
